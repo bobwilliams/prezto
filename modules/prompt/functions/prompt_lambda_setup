@@ -4,10 +4,9 @@
 # Authors:
 #   Bob Williams <bobwilliams.ii@gmail.com>
 #
-# Shout Outs:
+# Shout Outs & Inspiration:
 #  Alex Reece <awreece@gmail.com>
-#  last_command module
-#  http://codearcana.com/posts/2013/06/11/my-zsh-theme.html
+#  last_command module - http://codearcana.com/posts/2013/06/11/my-zsh-theme.html
 #
 # Screenshots:
 #
@@ -43,7 +42,9 @@ function battery_charge {
     echo `python ~/workspace/misc-scripts/battery.py3`
 }
 
-
+function prompt_lambda_command_time {
+  time_to_human $last_command_time
+}
 
 function prompt_lambda_precmd {
   setopt LOCAL_OPTIONS
@@ -65,9 +66,6 @@ function prompt_lambda_setup {
 
   # Add hook for calling git-info before each command.
   add-zsh-hook precmd prompt_lambda_precmd
-
-  # vars used in prompts
-  local command_time='%(?.%F{green}.%F{red})$(prompt_awreece_command_time)%f'
 
   # Set editor-info parameters.
   zstyle ':prezto:module:editor:info:completing' format "%B%F{160}...%f%b"
@@ -98,7 +96,7 @@ function prompt_lambda_setup {
   PROMPT='
 %F{64}%n@%m%f %F{166}λ%f %F{37}%~%f ${git_info:+${(e)git_info[prompt]}}
 %(!. %B%F{160}#%f%b.)${editor_info[keymap]} '
-  RPROMPT='${(e)git_info[rprompt]} %F{230}[%D{%L:%M:%S %p}]%f [$(battery_charge)][${command_time}]'
+  RPROMPT='${(e)git_info[rprompt]} [%F{230}%D{%L:%M:%S %p}%f] [$(battery_charge)] [%F{166}$(prompt_lambda_command_time)%f ]'
   SPROMPT='zsh: correct %F{160}%R%f to %F{64}%r%f [nyae]? '
 }
 
