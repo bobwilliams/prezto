@@ -96,7 +96,7 @@ function prompt_lambda_setup {
   PROMPT='
 %F{64}%n@%m%f %F{166}λ%f %F{37}%~%f ${git_info:+${(e)git_info[prompt]}}
 %(!. %B%F{160}#%f%b.)${editor_info[keymap]} '
-  RPROMPT='${(e)git_info[rprompt]} [%F{230}%D{%L:%M:%S %p}%f] [$(battery_charge)] [%F{37}$(prompt_lambda_command_time)%f ]'
+  RPROMPT='${(e)git_info[rprompt]} [%F{230}%D{%L:%M:%S %p}%f | $(battery_charge) | %F{37}$(prompt_lambda_command_time)%f]'
   SPROMPT='zsh: correct %F{160}%R%f to %F{64}%r%f [nyae]? '
 }
 
